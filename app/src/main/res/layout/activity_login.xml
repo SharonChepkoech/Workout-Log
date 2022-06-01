@@ -15,17 +15,18 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail"
+        app:startIconDrawable="@drawable/ic_baseline_email_24"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@android:color/transparent"
+        app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tieEmail"
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_email"
@@ -34,6 +35,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilPassword"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -46,7 +48,7 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiePassword"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"

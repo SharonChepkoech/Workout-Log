@@ -1,7 +1,14 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">WorkoutLog</string>
-    <string name="password">Password</string>
+    <string name="password" tools:ignore="DuplicateDefinition">Password</string>
     <string name="login">Login</string>
-    <string name="enter_email">Enter Email</string>
+    <string name="enter_email">Email</string>
     <string name="sign_up">Don\'t have an account? <u>Sign Up</u></string>
+    <string name="password_one">Password</string>
+    <string name="first_name">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="email">Email</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signup">SignUp</string>
+    <string name="login_activity">Already have an account? <u>Login</u> </string>
 </resources>
