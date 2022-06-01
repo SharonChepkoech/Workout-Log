@@ -60,7 +60,7 @@ class SignupActivity : AppCompatActivity() {
             var confirmPassword =  etConfirmPassword.text.toString()
 
             if (firstName.isBlank()){
-                tilFirstName.error = "Please input First Name"
+                tilFirstName.error = "Please input  First Name"
             }
             if (lastName.isBlank()){
                 tilLastName.error = "Please input Last Name"
