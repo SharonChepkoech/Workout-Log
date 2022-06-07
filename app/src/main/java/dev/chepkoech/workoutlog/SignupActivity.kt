@@ -3,6 +3,7 @@ package dev.chepkoech.workoutlog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -38,8 +39,8 @@ class SignupActivity : AppCompatActivity() {
         tilConfirmPassword = findViewById(R.id.tilConfirmPassword)
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
-        etConfirmPassword = findViewById(R.id.etPassword)
-        tvLogin = findViewById(R.id.tvLogin)
+        etConfirmPassword = findViewById(R.id.etConfirmPassword)
+        tvLogin = findViewById( R.id.tvLogin)
         btnSignUp = findViewById(R.id.btnSignUp)
 
         tvLogin.setOnClickListener {
@@ -57,7 +58,8 @@ class SignupActivity : AppCompatActivity() {
             var lastName = etLastName.text.toString()
             var email = etEmail.text.toString()
             var password = etPassword.text.toString()
-            var confirmPassword =  etConfirmPassword.text.toString()
+            var confirmPassword = etConfirmPassword.text.toString()
+
 
             if (firstName.isBlank()){
                 tilFirstName.error = "Please input  First Name"
@@ -68,11 +70,16 @@ class SignupActivity : AppCompatActivity() {
             if (email.isBlank()){
                 tilEmail.error = "Please input email"
             }
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+                tilEmail.error = "Emails do not match"
             if (password.isBlank()){
                 tilPassword.error = "Please input password"
             }
             if (confirmPassword.isBlank()){
                 tilConfirmPassword.error = "Please confirm your password"
+            }
+            if (confirmPassword != password){
+                tilConfirmPassword.error = "Please enter the same password"
             }
         }
     }
