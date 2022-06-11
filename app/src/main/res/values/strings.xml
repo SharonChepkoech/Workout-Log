@@ -11,4 +11,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="signup">SignUp</string>
     <string name="login_activity">Already have an account? <u>Login</u> </string>
+    <string name="plan">Plan</string>
+    <string name="track">Track</string>
+    <string name="person">Person</string>
 </resources>

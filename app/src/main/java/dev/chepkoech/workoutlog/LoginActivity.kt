@@ -33,7 +33,10 @@ class LoginActivity : AppCompatActivity() {
         }
         btnLogin.setOnClickListener{
             validate()
+            val intent = Intent(this,HomeActivity::class.java)
+            startActivity(intent)
         }
+
     }
     fun validate(){
         var email = etEmail.text.toString()
