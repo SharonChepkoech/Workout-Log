@@ -3,6 +3,7 @@ package dev.chepkoech.workoutlog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -44,6 +45,9 @@ class LoginActivity : AppCompatActivity() {
 
         if (email.isBlank()) {
             tilEmail.error = "Please input email"
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            tilEmail.error = "Email is invalid"
         }
         if (password.isBlank()){
             tilPassword.error = "Please input password"
