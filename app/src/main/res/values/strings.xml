@@ -16,4 +16,9 @@
     <string name="person">Person</string>
     <string name="welcome_back">Welcome back</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="plan_fragment">PLAN FRAGMENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="profile_fragment">PROFILE FRAGMENT</string>
+    <string name="track_fragment">TRACK FRAGMENT</string>
 </resources>

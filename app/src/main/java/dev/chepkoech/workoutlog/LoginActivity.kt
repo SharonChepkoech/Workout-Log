@@ -8,31 +8,22 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputLayout
+import dev.chepkoech.workoutlog.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
-    lateinit var tvSignUp: TextView
-    lateinit var etPassword:EditText
-    lateinit var etEmail:EditText
-    lateinit var tilPassword:TextInputLayout
-    lateinit var tilEmail:TextInputLayout
-    lateinit var btnLogin:Button
+    lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        tvSignUp = findViewById(R.id.tvSignUp)
-        etEmail = findViewById(R.id.etEmail)
-        etPassword = findViewById(R.id.etPassword)
-        tilEmail = findViewById(R.id.tilEmail)
-        tilPassword = findViewById(R.id.tilPassword)
-        btnLogin = findViewById(R.id.btnLogin)
 
-        tvSignUp.setOnClickListener{
+        binding.tvSignUp.setOnClickListener{
             intent = Intent(this,SignupActivity::class.java)
             startActivity(intent)
         }
-        btnLogin.setOnClickListener{
+        binding.btnLogin.setOnClickListener{
             validate()
             val intent = Intent(this,HomeActivity::class.java)
             startActivity(intent)
@@ -40,17 +31,17 @@ class LoginActivity : AppCompatActivity() {
 
     }
     fun validate(){
-        var email = etEmail.text.toString()
-        var password = etPassword.text.toString()
+        var email = binding.etEmail.text.toString()
+        var password = binding.etPassword.text.toString()
 
         if (email.isBlank()) {
-            tilEmail.error = "Please input email"
+            binding.tilEmail.error = "Please input email"
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            tilEmail.error = "Email is invalid"
+            binding.tilEmail.error = "Email is invalid"
         }
         if (password.isBlank()){
-            tilPassword.error = "Please input password"
+            binding.tilPassword.error = "Please input password"
         }
     }
 

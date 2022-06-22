@@ -8,78 +8,55 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputLayout
+import dev.chepkoech.workoutlog.databinding.ActivitySignupBinding
 import org.w3c.dom.Text
 
 class SignupActivity : AppCompatActivity() {
-
-    lateinit var tilFirstName: TextInputLayout
-    lateinit var tilLastName: TextInputLayout
-    lateinit var etFirstName: EditText
-    lateinit var etLastName: EditText
-    lateinit var tilEmail: TextInputLayout
-    lateinit var tilPassword: TextInputLayout
-    lateinit var tilConfirmPassword: TextInputLayout
-    lateinit var etEmail: EditText
-    lateinit var etPassword: EditText
-    lateinit var etConfirmPassword: EditText
-    lateinit var tvLogin: TextView
-    lateinit var btnSignUp: Button
-
+    lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+        binding = ActivitySignupBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        tilFirstName = findViewById(R.id.tilFirstName)
-        tilLastName = findViewById(R.id.tilLastName)
-        etFirstName = findViewById(R.id.etFirstName)
-        etLastName = findViewById(R.id.etLastName)
-        tilEmail = findViewById(R.id.tilEmail)
-        tilPassword = findViewById(R.id.tilPassword)
-        tilConfirmPassword = findViewById(R.id.tilConfirmPassword)
-        etEmail = findViewById(R.id.etEmail)
-        etPassword = findViewById(R.id.etPassword)
-        etConfirmPassword = findViewById(R.id.etConfirmPassword)
-        tvLogin = findViewById( R.id.tvLogin)
-        btnSignUp = findViewById(R.id.btnSignUp)
 
-        tvLogin.setOnClickListener {
+        binding.tvLogin.setOnClickListener {
             intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-        btnSignUp.setOnClickListener {
+        binding.btnSignUp.setOnClickListener {
             validate()
 
         }
     }
 
         fun validate(){
-            var firstName = etFirstName.text.toString()
-            var lastName = etLastName.text.toString()
-            var email = etEmail.text.toString()
-            var password = etPassword.text.toString()
-            var confirmPassword = etConfirmPassword.text.toString()
+            var firstName = binding.etFirstName.text.toString()
+            var lastName = binding.etLastName.text.toString()
+            var email = binding.etEmail.text.toString()
+            var password = binding.etPassword.text.toString()
+            var confirmPassword = binding.etConfirmPassword.text.toString()
 
 
             if (firstName.isBlank()){
-                tilFirstName.error = "Please input  First Name"
+                binding.tilFirstName.error = "Please input  First Name"
             }
             if (lastName.isBlank()){
-                tilLastName.error = "Please input Last Name"
+                binding.tilLastName.error = "Please input Last Name"
             }
             if (email.isBlank()){
-                tilEmail.error = "Please input email"
+                binding.tilEmail.error = "Please input email"
             }
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-                tilEmail.error = "Emails do not match"
+                binding.tilEmail.error = "Emails do not match"
             if (password.isBlank()){
-                tilPassword.error = "Please input password"
+                binding.tilPassword.error = "Please input password"
             }
             if (confirmPassword.isBlank()){
-                tilConfirmPassword.error = "Please confirm your password"
+                binding.tilConfirmPassword.error = "Please confirm your password"
             }
             if (confirmPassword != password){
-                tilConfirmPassword.error = "Please enter the same password"
+                binding.tilConfirmPassword.error = "Please enter the same password"
             }
         }
     }
