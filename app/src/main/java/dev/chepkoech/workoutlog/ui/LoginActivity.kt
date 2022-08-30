@@ -1,13 +1,10 @@
-package dev.chepkoech.workoutlog
+package dev.chepkoech.workoutlog.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import com.google.android.material.textfield.TextInputLayout
+import dev.chepkoech.workoutlog.ui.SignupActivity
 import dev.chepkoech.workoutlog.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -20,12 +17,12 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.tvSignUp.setOnClickListener{
-            intent = Intent(this,SignupActivity::class.java)
+            intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
         binding.btnLogin.setOnClickListener{
             validate()
-            val intent = Intent(this,HomeActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
 
