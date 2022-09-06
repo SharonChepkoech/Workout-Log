@@ -23,7 +23,7 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.tvLogin.setOnClickListener {
-            intent = Intent(this, HomeActivity::class.java)
+            intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
         binding.btnSignUp.setOnClickListener {
