@@ -1,4 +1,4 @@
-package dev.chepkoech.workoutlog
+package dev.chepkoech.workoutlog.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

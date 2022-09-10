@@ -6,30 +6,30 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
-import dev.chepkoech.workoutlog.ApiClient
-import dev.chepkoech.workoutlog.ApiInterface
-import dev.chepkoech.workoutlog.ui.SignupActivity
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import dev.chepkoech.workoutlog.api.ApiClient
+import dev.chepkoech.workoutlog.api.ApiInterface
 import dev.chepkoech.workoutlog.databinding.ActivityLoginBinding
 import dev.chepkoech.workoutlog.models.LoginRequest
 import dev.chepkoech.workoutlog.models.LoginResponse
+import dev.chepkoech.workoutlog.viewmodel.UserViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
-
     lateinit var sharedPrefs: SharedPreferences
+    val userViewModel : UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
 
         sharedPrefs = getSharedPreferences("WORKOUTLOG_PREFS", MODE_PRIVATE)
-//        sharedPrefs = sharedPreferences(name: "WORKOUTLOG_PREFS", "MODE_PRIVATE")
 
         setContentView(binding.root)
-
 
         binding.tvSignUp.setOnClickListener {
             intent = Intent(this, SignupActivity::class.java)
@@ -40,7 +40,19 @@ class LoginActivity : AppCompatActivity() {
 //            val intent = Intent(this, HomeActivity::class.java)
 //            startActivity(intent)
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        userViewModel.loginLiveData.observe(this, Observer { loginResponse ->
+            Toast.makeText(baseContext, loginResponse?.message, Toast.LENGTH_LONG).show()
+            persistLoginDetails(loginResponse!!)
+            startActivity(Intent(baseContext, HomeActivity::class.java))
+        })
+
+        userViewModel.loginError.observe(this, Observer{ errorMessage ->
+            Toast.makeText(baseContext, errorMessage, Toast.LENGTH_LONG).show()
+        })
     }
 
     fun validate() {
@@ -62,33 +74,10 @@ class LoginActivity : AppCompatActivity() {
         }
         if (!error) {
             val loginRequest = LoginRequest(email, password)
-            makeLoginRequest(loginRequest)
+            userViewModel.login(loginRequest)
         }
     }
 
-    fun makeLoginRequest(loginRequest: LoginRequest) {
-        val apiClient = ApiClient.buildApiClient(ApiInterface::class.java)
-        val request = apiClient.loginUser(loginRequest)
-
-        request.enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful) {
-                    val loginResponse = response.body()
-                    Toast.makeText(baseContext, loginResponse?.message, Toast.LENGTH_LONG).show()
-                    persistLoginDetails(loginResponse!!)
-                    startActivity(Intent(baseContext, HomeActivity::class.java))
-                }
-                else{
-                    val error = response.errorBody()?.string()
-                    Toast.makeText(baseContext, error, Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
-            }
-        })
-    }
     fun persistLoginDetails(loginResponse: LoginResponse){
         val editor = sharedPrefs.edit()
         editor.putString("USER_ID", loginResponse.userId)
@@ -97,5 +86,4 @@ class LoginActivity : AppCompatActivity() {
         editor.apply()
 //        We us the editor to . All keys are in all caps
     }
-
 }
